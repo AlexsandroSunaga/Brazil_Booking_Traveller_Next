@@ -3,3 +3,4 @@
 Internal delivery notes (one line per active dev day).
 
 - 2019-09-16: iteration 1 - reviews, QA, and integration pass
+- 2019-09-20: iteration 5 - reviews, QA, and integration pass

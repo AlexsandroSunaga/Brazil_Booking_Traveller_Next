@@ -21,3 +21,4 @@ Internal delivery notes (one line per active dev day).
 - 2020-01-07: iteration 72 - reviews, QA, and integration pass
 - 2020-01-13: iteration 76 - reviews, QA, and integration pass
 - 2020-01-21: iteration 81 - reviews, QA, and integration pass
+- 2020-01-27: iteration 85 - reviews, QA, and integration pass

@@ -31,7 +31,17 @@ Built by **Alexsandro Sunaga**. "Premier Transfer Brasil", phone numbers, e-mail
 `POST /api/quote`, `GET /api/places`, `POST /api/bookings`, `POST /api/auth/login`, `POST /api/auth/logout`, and `/api/admin/{dashboard,pricing,settings,vehicles}`.
 
 ### Optional extras in `stack/`
-A separate FastAPI quote/booking service (`stack/api`, port 8010) and a Vite + Mantine SPA (`stack/product-web`). They are standalone portfolio add-ons and are not needed to run the Next.js site. See `stack/README.md`.
+A separate FastAPI quote/booking service (`backend/`, port 8010) and a Vite + Mantine SPA (`stack/product-web`). They are standalone portfolio add-ons and are not needed to run the Next.js site. See `stack/README.md`.
+
+## Tech stack
+
+| Area | Technologies |
+|------|--------------|
+| Frontend | `Next.js 15 (App Router)`, `React 19`, `TypeScript`, `Tailwind CSS 4`, `Mantine`, `Redux Toolkit`, `React Router`, `Vite`, `Lucide` |
+| Backend | `Next.js API routes`, `FastAPI`, `SQLAlchemy (async)`, `Pydantic`, `Zod` |
+| Database | `Prisma ORM`, `SQLite` |
+| Auth | `JWT cookies (jose)`, `bcryptjs`, `python-jose` |
+| DevOps and tooling | `Docker`, `ESLint`, `tsx`, `date-fns` |
 
 ## Run locally
 
@@ -64,7 +74,7 @@ npm run dev
 ### Optional: FastAPI service
 
 ```bash
-cd stack/api
+cd backend
 python -m venv .venv && .venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn src.main:backend_app --reload --port 8010
@@ -81,7 +91,7 @@ prisma/        schema.prisma (AdminUser, VehicleType, PricingRule, SurgeRule, Cu
 src/app/       pages (home, book, fleet, locations, admin) and API routes
 src/components booking flow, layout and UI components
 src/lib/       pricing, auth, validation, Brazil constants (airports, routes, FAQ)
-stack/api      optional FastAPI service
+backend/        FastAPI service (runs without third-party keys)
 stack/product-web  optional Vite SPA
 ```
 

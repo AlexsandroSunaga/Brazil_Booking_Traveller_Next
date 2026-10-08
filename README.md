@@ -31,7 +31,7 @@ Built by **Alexsandro Sunaga**. "Premier Transfer Brasil", phone numbers, e-mail
 `POST /api/quote`, `GET /api/places`, `POST /api/bookings`, `POST /api/auth/login`, `POST /api/auth/logout`, and `/api/admin/{dashboard,pricing,settings,vehicles}`.
 
 ### Optional extras in `stack/`
-A separate FastAPI quote/booking service (`backend/`, port 8010) and a Vite + Mantine SPA (`stack/product-web`). They are standalone portfolio add-ons and are not needed to run the Next.js site. See `stack/README.md`.
+A separate FastAPI quote/booking service (`backend/`, port 8010) and a Vite + Mantine SPA (`stack/product-web`). They are optional: the Next.js site runs on its own and uses `backend/` only when `BACKEND_URL` is set. See `stack/README.md`.
 
 ## Tech stack
 
@@ -79,6 +79,13 @@ python -m venv .venv && .venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn src.main:backend_app --reload --port 8010
 ```
+
+Then set `BACKEND_URL="http://localhost:8010/api/v1"` in `.env`. The Next.js API routes will use the service for:
+
+- **Route estimates:** `POST /route` supplies distance and duration when no Google Maps key is set.
+- **Booking notifications:** `POST /notifications/booking-confirmation` handles the email and SMS hooks. It logs instead of sending when `SENDGRID_API_KEY` / `TWILIO_*` are absent.
+
+Neither needs a third-party key. With `BACKEND_URL` empty, or the service down, the site falls back to its built-in logic. Tests: `cd backend && pip install -r requirements-dev.txt && pytest`.
 
 ## Environment
 

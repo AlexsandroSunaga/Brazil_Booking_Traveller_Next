@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { generateBookingReference } from "@/lib/pricing";
 import { requireAdmin } from "@/lib/auth";
 import { customerDetailsSchema } from "@/lib/validation";
+import { notifyBookingConfirmed } from "@/lib/backend";
 
 const bookingSchema = customerDetailsSchema.extend({
   pickupAddress: z.string().min(1, "Pickup address is required"),
@@ -106,9 +107,13 @@ export async function POST(request: NextRequest) {
       include: { customer: true, vehicleType: true },
     });
 
-    // Demo notification log (production: SendGrid + Twilio)
-    console.log(`[NOTIFICATION] Booking ${reference} confirmed for ${data.email}`);
-    console.log(`[SMS] Sent to ${data.phone}: Your transfer ${reference} is confirmed.`);
+    // Notifications go through the FastAPI service when BACKEND_URL is set (it logs when no
+    // SendGrid/Twilio keys exist); otherwise fall back to console logs. Never blocks the booking.
+    const sent = await notifyBookingConfirmed(reference, data.email, data.phone);
+    if (!sent) {
+      console.log(`[NOTIFICATION] Booking ${reference} confirmed for ${data.email}`);
+      console.log(`[SMS] Sent to ${data.phone}: Your transfer ${reference} is confirmed.`);
+    }
 
     return NextResponse.json({
       reference: booking.reference,

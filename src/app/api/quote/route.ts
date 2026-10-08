@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { calculateQuote } from "@/lib/pricing";
 import { getDistanceMatrix } from "@/lib/google-maps";
+import { estimateRoute } from "@/lib/backend";
 
 const quoteSchema = z.object({
   pickupLat: z.number(),
@@ -30,6 +31,13 @@ export async function POST(request: NextRequest) {
     if (matrix) {
       quote.distanceMiles = matrix.miles;
       quote.durationMinutes = matrix.minutes;
+    } else {
+      // No Google Maps key: let the FastAPI service estimate the route when it is configured.
+      const route = await estimateRoute(input.pickupLat, input.pickupLng, input.dropoffLat, input.dropoffLng);
+      if (route) {
+        quote.distanceMiles = route.distanceKm;
+        quote.durationMinutes = route.durationMinutes;
+      }
     }
 
     return NextResponse.json(quote);

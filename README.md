@@ -33,6 +33,16 @@ Built by **Alexsandro Sunaga**. "Premier Transfer Brasil", phone numbers, e-mail
 ### Optional extras in `stack/`
 A separate FastAPI quote/booking service (`stack/api`, port 8010) and a Vite + Mantine SPA (`stack/product-web`). They are standalone portfolio add-ons and are not needed to run the Next.js site. See `stack/README.md`.
 
+## Tech stack
+
+| Area | Technologies |
+|------|--------------|
+| Frontend | `Next.js 15 (App Router)`, `React 19`, `TypeScript`, `Tailwind CSS 4`, `Mantine`, `Redux Toolkit`, `React Router`, `Vite`, `Lucide` |
+| Backend | `Next.js API routes`, `FastAPI`, `SQLAlchemy (async)`, `Pydantic`, `Zod` |
+| Database | `Prisma ORM`, `SQLite` |
+| Auth | `JWT cookies (jose)`, `bcryptjs`, `python-jose` |
+| DevOps and tooling | `Docker`, `ESLint`, `tsx`, `date-fns` |
+
 ## Run locally
 
 Requires Node.js 20+.

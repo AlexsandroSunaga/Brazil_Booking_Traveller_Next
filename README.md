@@ -5,7 +5,7 @@
 ![Booking flow](docs/screenshots/03-booking.png)
 ![Airport page](docs/screenshots/04-airport.png)
 
-A demo airport-transfer booking platform set in Brazil: fixed-price quotes in **BRL**, six major Brazilian airports, and a small operations admin. Built with **Next.js 15 (App Router)**, **React 19**, **Tailwind CSS 4**, **Prisma** and **SQLite**.
+A airport-transfer booking platform set in Brazil: fixed-price quotes in **BRL**, six major Brazilian airports, and a small operations admin. Built with **Next.js 15 (App Router)**, **React 19**, **Tailwind CSS 4**, **Prisma** and **SQLite**.
 
 Built by **Alexsandro Sunaga**. "Premier Transfer Brasil", phone numbers, e-mail addresses, reviews, and statistics are fictional sample data for demonstration.
 
